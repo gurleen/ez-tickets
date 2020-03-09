@@ -62,3 +62,6 @@ typings/
 
 # Visual Studio Code
 .vscode
+ez-tickets.code-workspace
+
+*.sqlite
