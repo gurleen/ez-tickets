@@ -1,16 +1,15 @@
 'use strict'
-module.exports = (sequelize, Datatypes) => {
-    const Ticket = sequelize.define('ticket',{
-        title = Datatypes.STRING,
-        description = Datatypes.TEXT,
-        price = Datatypes.FLOAT,
-        date = Datatypes.DATEONLY,
-        time = Datatypes.DATE,
-        owner = Datatypes.STRING.allowNull
+
+module.exports = (sequelize, DataTypes) => {
+    const Ticket = sequelize.define('Ticket', {
+        price: DataTypes.FLOAT
+    })
+
+    Ticket.associate = function(models) {
+        models.Ticket.belongsTo(models.Event, {
+            onDelete: "CASCADE"
+        })
     }
-    )
+
+    return Ticket
 }
-Event.hasOne(Ticket, {
-    foreignKey: ''
-  });
-Ticket.belongsTo(Venue);
