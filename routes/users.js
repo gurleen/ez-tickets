@@ -49,7 +49,6 @@ router.post('/login', function(req, res, next) {
 /* Verify login with JWT */
 router.get('/verify', doAuth, function(req, res, next) {
     if (req.user) {
-        console.log(req.user)
         res.status(200).json({ 'staus': 'OK' })
     } else {
         res.status(500).json({ 'status': 'ERR' })
