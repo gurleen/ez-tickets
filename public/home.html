@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZTickets</title>
+    <style>
+
+/*       div {
+        display: flex;
+        max-width: 100%;
+        max-height: 250px;
+      } */
+/*       table, th, td {
+            padding: 10px;
+            border: 1px dotted black;
+            border-collapse: collapse;
+            width: auto;
+            height: 300px;
+        } */
+      img {
+        max-width: 100%;
+      }
+      /* Style The Dropdown Button */
+      .dropbtn {
+        background-color: darkturquoise;
+        color: black;
+        padding: 15px 20px;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+      }
+    
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+    
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+    
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        background-color: lightskyblue;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+    
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {
+        background-color: #f1f1f1
+      }
+    
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {
+        background-color: lightblue;
+      }
+
+      html, body {
+      width: 100%;
+      height: 600px;
+      margin: 0;
+      padding: 0;
+      font-family: "Helvetica", sans-serif;
+      }
+      img {
+      max-width: 100%;
+      }
+      .slider-container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      }
+      .menu {
+      position: absolute;
+      left: 0;
+      z-index: 900;
+      width: 100%;
+      bottom: 0;
+      }
+      .menu label {
+      cursor: pointer;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50px;
+      margin: 0 0.2em 1em;
+      }
+      .menu label:hover,.menu label:focus {
+      background: #1c87c9;
+      }
+      .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      z-index: 10;
+      padding: 8em 1em 0;
+      background-size: cover;
+      background-position: 50% 50%;
+      transition: left 0s 0.75s;
+      }
+      [id^="slide"]:checked + .slide {
+      left: 0;
+      z-index: 100;
+      transition: left 0.65s ease-out;
+      }
+      .slide-1 {
+      background-image: url("https://i.scdn.co/image/ab67616d0000b273a117ac19ee51aebdf05fe88c");
+      }
+      .slide-2 {
+      background-image: url("https://www.nba.com/sixers/sites/sixers/files/philaunite_blue-01.jpg");
+      }
+      .slide-3 {
+      background-image: url("https://i.scdn.co/image/ab67616d0000b2736376adb8412509a697896090");
+      }
+    </style>
+</head>
+<body>
+  <h1 style="text-align: center;">EZTickets</h1>
+ 
+
+  <div class="dropdown" style="display: flex; padding-bottom: 100px; justify-content: center;" >
+    <button class="dropbtn">Select an event</button>
+    <div class="dropdown-content">
+      <a href="https://www.youtube.com/watch?v=M-j159LFwGw" target="_blank">Khalid</a>
+      <a href="https://www.youtube.com/watch?v=tE5omBiMWmc" target="_blank">Sixers Game</a>
+      <a href="https://www.youtube.com/watch?v=YS0h2-hy9rw" target="_blank">Roddy Rich</a>
+      <a href="https://www.youtube.com/watch?v=K7K1lDHvfAI" target="_blank">Daniel Caesar</a>
+      <a href="https://www.youtube.com/watch?v=L7mfjvdnPno" target="_blank">Trevor Daniel</a>
+    </div>
+  </div>
+
+  <div class="slider-container" style="display: flex;">
+    <div class="menu">
+      <label for="slide-dot-1"></label>
+      <label for="slide-dot-2"></label>
+      <label for="slide-dot-3"></label>
+    </div>
+    <input id="slide-dot-1" type="radio" name="slides" checked>
+    <div class="slide slide-1"></div>
+    <input id="slide-dot-2" type="radio" name="slides">
+    <div class="slide slide-2"></div>
+    <input id="slide-dot-3" type="radio" name="slides">
+    <div class="slide slide-3"></div>
+  </div>
+  <!--         <table>
+            <tr>
+                <td><img src="https://i.axs.com/2019/03/65454-optimized_5c8fd86b30473.jpg" width="450" height="350"></td>
+                <td><img src="https://www.nba.com/sixers/sites/sixers/files/philaunite_blue-01.jpg" width="450" height="350"></td>
+                <td><img src="https://img-dev.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F82360919%2F350041607443%2F1%2Foriginal.20191122-220715?auto=compress&crop=top&fit=crop&h=433&w=650&s=0f3ccfb9b9f4989681d7fefbc87a67b4" width="450" height="350"></td>
+            </tr>
+            <tr>
+                <td><img src="https://i.scdn.co/image/ab67616d0000b273a117ac19ee51aebdf05fe88c" width="450" height="350"></td>
+                <td><img src="https://i.scdn.co/image/ab67616d0000b2736376adb8412509a697896090" width="450" height="350"></td>
+            </tr>
+        </table> -->
+</body>
+</html>
