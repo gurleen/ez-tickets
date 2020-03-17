@@ -6,14 +6,12 @@ module.exports = (sequelize, DataTypes) => {
         description: DataTypes.TEXT,
         date: DataTypes.DATE,
         price: DataTypes.DOUBLE,
-        tickets: DataTypes.INTEGER
+        tickets: DataTypes.INTEGER,
+        ticketsSold: DataTypes.INTEGER
     })
 
     Event.associate = function(models) {
         models.Event.belongsTo(models.Venue, {
-            onDelete: "CASCADE"
-        })
-        models.Event.hasOne(models.Ticket, {
             onDelete: "CASCADE"
         })
     }

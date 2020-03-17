@@ -23,7 +23,7 @@ let strategy = new JwtStrategy(jwtOptions, async function(jwt_payload, next) {
     console.log('payload received', jwt_payload);
     let user = await models.User.findOne({
         where: { username: jwt_payload.id },
-        attributes: ['username']
+        attributes: ['username', 'id']
     });
     if (user) {
         next(null, user);

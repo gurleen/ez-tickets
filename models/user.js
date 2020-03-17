@@ -22,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
     User.associate = function(models) {
-        // TODO: Associate User with Venue model
+        models.User.hasMany(models.Venue, {
+            onDelete: "CASCADE"
+        })
     };
     return User;
 };
