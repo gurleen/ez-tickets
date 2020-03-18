@@ -7,13 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        button {
+            margin-top: 20px;
+            width: 50%;
+            background-color: #555555;
+            color: white;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 5px;
+            position: relative;
+            left: 25%;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>
+        Confirmation
+    </h1>
+    <br>
     <div id="app">
-        <h1>
-            Confirmation
-        </h1>
         <h3>
             Event: {{ event.title }}
         </h3>
@@ -29,7 +44,7 @@
             Total:
         </h5>
         <input v-model="total" type="text" id="tot" name="total" placeholder="$300.00" readonly>
-
+        <br>
         <button v-on:click="purchase" class="btn">Confirm Payment</button>
     </div>
 
