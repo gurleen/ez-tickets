@@ -9,7 +9,8 @@ const passportJWT = require('passport-jwt');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var venuesRouter = require('./routes/venues');
-var eventsRouter = require('./routes/events')
+var eventsRouter = require('./routes/events');
+var ordersRouter = require('./routes/orders')
 
 var app = express();
 
@@ -17,13 +18,13 @@ let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy;
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'changeThisInProduction';
+jwtOptions.secretOrKey = process.env.JWT_SECRET;
 
 let strategy = new JwtStrategy(jwtOptions, async function(jwt_payload, next) {
     console.log('payload received', jwt_payload);
     let user = await models.User.findOne({
         where: { username: jwt_payload.id },
-        attributes: ['username']
+        attributes: ['username', 'id']
     });
     if (user) {
         next(null, user);
@@ -43,6 +44,7 @@ app.use(passport.initialize());
 app.use('/', indexRouter);
 app.use('/auth', usersRouter);
 app.use('/venue', venuesRouter);
-app.use('/event', eventsRouter)
+app.use('/event', eventsRouter);
+app.use('/order', ordersRouter);
 
 module.exports = app;

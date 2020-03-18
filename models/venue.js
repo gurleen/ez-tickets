@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
         models.Venue.hasMany(models.Event, {
             onDelete: "CASCADE"
         })
+        models.Venue.belongsTo(models.Venue, {
+            onDelete: "CASCADE"
+        })
     }
 
     return Venue

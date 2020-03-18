@@ -1,6 +1,9 @@
 var express = require('express');
 var models = require('../models');
 var router = express.Router();
+const passport = require('passport');
+
+const doAuth = passport.authenticate('jwt', { session: false });
 
 /* GET all venues */
 router.get('/', function(req, res, next) {
@@ -31,12 +34,14 @@ router.get('/:id', function(req, res, next) {
 })
 
 /* POST a new venue */
-router.post('/create', function(req, res) {
+router.post('/create', doAuth, function(req, res) {
     models.Venue.create({
         name: req.body.name,
         location: req.body.location,
-        description: req.body.description
-    }).then(function() {
+        description: req.body.description,
+        UserId: req.user.id
+    }).then(function(venue) {
+        venue.save()
         res.redirect('/venue/')
     })
 });
