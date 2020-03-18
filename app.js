@@ -18,7 +18,7 @@ let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy;
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = process.env.JWT_SECRET;
+jwtOptions.secretOrKey = "changeThisInProduction";
 
 let strategy = new JwtStrategy(jwtOptions, async function(jwt_payload, next) {
     console.log('payload received', jwt_payload);
