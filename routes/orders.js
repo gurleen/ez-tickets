@@ -10,7 +10,7 @@ router.get('/', doAuth, function(req, res, next) {
     models.Order.findAll({
         attributes: ['id', 'quantity', 'EventId', 'createdAt'],
         where: {
-            userId: req.user.id
+            UserId: req.user.id
         }
     }).then(function(orders) {
         res.setHeader('Content-Type', 'application/json');
