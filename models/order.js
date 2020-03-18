@@ -2,14 +2,17 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Order = sequelize.define('Order', {
-        quantity: DataTypes.INTEGER
+        quantity: DataTypes.INTEGER,
+        total: DataTypes.DOUBLE
     })
 
     Order.associate = function(models) {
         models.Order.belongsTo(models.User, {
             onDelete: "CASCADE"
         })
-        models.Order.hasOne(models.Event)
+        models.Order.belongsTo(models.Event, {
+            onDelete: "CASCADE"
+        })
     }
 
     return Order
