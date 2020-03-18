@@ -24,7 +24,7 @@ router.get('/:id', function(req, res, next) {
             id: req.params['id'],
         }
     }).then(function(event) {
-        if (venue.length === 0) {
+        if (event.length === 0) {
             res.status(500).send({ error: "No such event exists." })
             return
         }
