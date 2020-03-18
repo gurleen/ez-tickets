@@ -1,8 +1,29 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+}
+
+.events {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.singleEvent {
+    background-color: rgb(40, 42, 54);
+    margin: 3px;
+    padding: 5px;
+}
+
+a {
+    text-decoration: none;
 }
