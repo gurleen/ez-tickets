@@ -1,0 +1,31 @@
+body {
+    font-family: Arial;
+    font-size: 17px;
+    padding: 8px;
+}
+
+.container {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: auto;
+}
+
+button {
+    margin-top: 20px;
+    width: 50%;
+    background-color: #555555;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    position: relative;
+    left: 25%;
+}
