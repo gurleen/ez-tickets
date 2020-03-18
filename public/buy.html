@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="styles.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="app">
         <h1>
             Payment
         </h1>
         <div class="row">
             <div class="column">
-                <h3>Billing Address</h3>
                 <h4>
                     Full Name
                 </h4>
@@ -78,13 +76,40 @@
 
             </div>
         </div>
-
-
-
+        <br>
+        <button v-on:click="cont">Continue to Checkout</button>
     </div>
-    <input id="submit" type="submit" value="Continue to Checkout" class="btn" onclick="window.location.href = 'confirm.html';">
 
     <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                eventId: 0,
+                url: ""
+            },
+            mounted: () => {
+                if (!localStorage.authToken) {
+                    window.location.href = "/";
+                }
+                var vars = {}
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+                    vars[key] = value;
+                });
+                if (vars.eventId === undefined) {
+                    console.log('no event')
+                    window.location.href = "/";
+                } else {
+                    console.log('event', vars.eventId)
+                    this.eventId = vars.eventId
+                }
+            },
+            methods: {
+                cont: () => {
+                    console.log('here')
+                    window.location.href = `/confirm.html?eventId=${this.eventId}`;
+                }
+            }
+        })
     </script>
 
 </body>

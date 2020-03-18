@@ -76,6 +76,10 @@
             },
             methods: {
                 purchase: () => {
+                    if (app.input.qty < 1) {
+                        alert("Quantity must be greater than zero.")
+                        return
+                    }
                     const config = {
                         headers: {
                             Authorization: `Bearer ${localStorage.authToken}`
