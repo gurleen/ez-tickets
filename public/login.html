@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <title>Login - EZ-Tickets</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Log In</h1>
+        <p v-if="postReg">Thanks for registering! Please log in.</p>
+        <label for="uname">Username: </label>
+        <input name="uname" v-model="username" type="text">
+        <label for="pword">Password: </label>
+        <input name="pword" v-model="password" type="password">
+        <button v-on:click="logIn">Log In</button>
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                username: "",
+                password: "",
+                postReg: false
+            },
+            mounted() {
+                if (localStorage.authToken) {
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.authToken}`
+                        }
+                    }
+                    axios.get("https://ez-tickets.herokuapp.com/auth/verify", config).then((res) => {
+                        window.location.href = "/";
+                    }).catch((err) => {
+                        console.log("Auth token not valid")
+                        localStorage.removeItem("authToken")
+                        localStorage.removeItem("username")
+                    })
+                }
+
+                var vars = {}
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+                    vars[key] = value;
+                });
+                if (vars.postReg === "true") {
+                    this.postReg = true;
+                }
+            },
+            methods: {
+                logIn: () => {
+                    var payload = {
+                        username: app.username,
+                        password: app.password
+                    }
+                    axios.post("https://ez-tickets.herokuapp.com/auth/login", data = payload).then((res) => {
+                        console.log(res)
+                        if (res.data.success === "true") {
+                            console.log(res.data.token)
+                            localStorage.setItem("authToken", res.data.token)
+                            localStorage.setItem("username", app.username)
+                            window.location.href = "/";
+                        } else {
+                            alert("Incorrect username or password. Try again!")
+                        }
+                    }).catch((err) => {
+                        // alert("An error occurred. Please try again!")
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

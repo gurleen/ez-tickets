@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>Login - EZ-Tickets</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Registration</h1>
+        <label for="uname">Username: </label>
+        <input name="uname" v-model="username" type="text">
+        <label for="pword">Password: </label>
+        <input name="pword" v-model="password" type="password">
+        <button v-on:click="logIn">Create Account</button>
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                username: "",
+                password: "",
+            },
+            mounted() {
+                if (localStorage.authToken) {
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.authToken}`
+                        }
+                    }
+                    axios.get("https://ez-tickets.herokuapp.com/auth/verify", config).then((res) => {
+                        window.location.href = "/";
+                    }).catch((err) => {
+                        console.log("Auth token not valid")
+                        localStorage.removeItem("authToken")
+                        localStorage.removeItem("username")
+                    })
+                }
+
+            },
+            methods: {
+                logIn: () => {
+                    var payload = {
+                        username: app.username,
+                        password: app.password
+                    }
+                    axios.post("https://ez-tickets.herokuapp.com/auth/register", data = payload).then((res) => {
+                        console.log(res)
+                        window.location.href = "/login.html?postRegister=true";
+                    }).catch((err) => {
+                        alert("An error happened.")
+                        return
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
