@@ -18,22 +18,25 @@
             <a href="/register.html"><button>Register</button></a>
         </div>
 
-        <h3>My Orders:</h3>
-        <ul>
-            <li v-for="order in orders" :key="order.id">
-                {{ order.quantity }} tickets to {{ events[order.id+1].title }} on {{ events[order.id+1].date.slice(0,-14) }}
-            </li>
-        </ul>
-        <h3>Popular Events:</h3>
-        <div class="events">
-            <div class="singleEvent" v-for="event in events" :key="event.id">
-                <a v-bind:href="'/confirm.html?eventId=' + event.id">
-                    <p>{{ event.title }}</p>
-                    <p>on {{ event.date.slice(0,-14) }}</p>
-                    <p>Tickets from ${{ event.price }}</p>
-                </a>
+        <div v-if="loggedIn">
+            <h3>My Orders:</h3>
+            <ul>
+                <li v-for="order in orders" :key="order.id">
+                    {{ order.quantity }} tickets to {{ events.find(e => e.id===order.EventId).title }} on {{ events.find(e => e.id===order.EventId).date.slice(0,-14) }}
+                </li>
+            </ul>
+            <h3>Popular Events:</h3>
+            <div class="events">
+                <div class="singleEvent" v-for="event in events" :key="event.id">
+                    <a v-bind:href="'/confirm.html?eventId=' + event.id">
+                        <p>{{ event.title }}</p>
+                        <p>on {{ event.date.slice(0,-14) }}</p>
+                        <p>Tickets from ${{ event.price }}</p>
+                    </a>
+                </div>
             </div>
         </div>
+
     </div>
 
 
