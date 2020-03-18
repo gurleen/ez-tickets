@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>
+            Confirmation
+        </h1>
+        <h3>
+            Event: {{ event.title }}
+        </h3>
+        <h5>
+            Quantity:
+        </h5>
+        <input v-model="input.qty" min="0" step="1" type="text" id="eve" name="eve">
+        <h5>
+            Ticket Price:
+        </h5>
+        <input v-model="event.price" type="text" id="tpr" name="tpr" placeholder="$250.00" readonly>
+        <h5>
+            Total:
+        </h5>
+        <input v-model="total" type="text" id="tot" name="total" placeholder="$300.00" readonly>
+
+        <button v-on:click="purchase" class="btn">Confirm Payment</button>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                event: {
+                    title: "",
+                    price: 0,
+                    id: 0,
+                    tickets: 0,
+                    ticketsSold: 0
+                },
+                input: {
+                    qty: 0
+                }
+            },
+            computed: {
+                total: function() {
+                    return this.event.price * this.input.qty
+                },
+            },
+            mounted() {
+                if (!localStorage.authToken) {
+                    window.location.href = "/";
+                }
+                var vars = {}
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+                    vars[key] = value;
+                });
+                if (vars.eventId === undefined) {
+                    console.log('no event')
+                    window.location.href = "/";
+                } else {
+                    console.log('event', vars.eventId)
+                }
+                axios.get(`https://ez-tickets.herokuapp.com/event/${vars.eventId}`).then((res) => {
+                    console.log(res.data[0])
+                    app.event = res.data[0]
+                }).catch((err) => {
+                    window.location.href = "/";
+                })
+            },
+            methods: {
+                purchase: () => {
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.authToken}`
+                        }
+                    }
+                    console.log(`Buying ${app.input.qty} tickets to ${app.event.title} for ${app.total}`)
+                    axios.post("https://ez-tickets.herokuapp.com/order/create", data = {
+                        quantity: app.input.qty,
+                        eventId: app.event.id
+                    }, config).then((res) => {
+                        console.log(res)
+                        window.location.href = "/";
+                    }).catch((err) => {
+                        alert("Error: " + err.response.data.error)
+                    })
+                }
+            }
+        })
+    </script>
+
+</body>
+
+
+
+
+
+
+
+
+</html>

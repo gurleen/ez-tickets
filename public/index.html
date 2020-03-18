@@ -1,13 +1,50 @@
 <html>
 
 <head>
-  <title>Express</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>EZ-Tickets</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+    <div id="app">
+        <h1>Welcome to EZ-Tickets</h1>
+        <p v-if="loggedIn">You are logged in as @{{ username }}</p>
+        <button v-if="loggedIn" v-on:click="logOut">Log Out</button>
+        <div v-else>
+            <a href="/login.html"><button>Log In</button></a>
+            <a href="/register.html"><button>Register</button></a>
+        </div>
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                loggedIn: false,
+                username: ""
+            },
+            mounted() {
+                if (localStorage.authToken) {
+                    this.loggedIn = true
+                    this.username = localStorage.username
+                }
+            },
+            methods: {
+                logOut: () => {
+                    localStorage.removeItem("authToken")
+                    localStorage.removeItem("username")
+                    app.username = ""
+                    app.loggedIn = false;
+                },
+                logIn: () => {
+                    window.location.href = "/login.html";
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
