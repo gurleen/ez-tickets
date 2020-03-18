@@ -28,7 +28,7 @@
             <h3>Popular Events:</h3>
             <div class="events">
                 <div class="singleEvent" v-for="event in events" :key="event.id">
-                    <a v-bind:href="'/confirm.html?eventId=' + event.id">
+                    <a v-bind:href="'/buy.html?eventId=' + event.id">
                         <p>{{ event.title }}</p>
                         <p>on {{ event.date.slice(0,-14) }}</p>
                         <p>Tickets from ${{ event.price }}</p>
