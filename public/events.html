@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Event Details</title>
+    <style>
+        .formfield * {
+            vertical-align: middle;
+        }
+        table, th, td {
+            padding: 10px;
+            border: 1px dotted black;
+            border-collapse: collapse;
+            width: auto;
+            height: 400px;
+        }
+        img {
+            width: 500px;
+            height: 400px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 style="text-align: center;">Event Name</h1>
+
+
+    <table>
+        <tr>
+            <td><img src="https://www.nba.com/sixers/sites/sixers/files/philaunite_blue-01.jpg"></img></td>
+            <td><img src="https://www.nba.com/sixers/sites/sixers/files/philaunite_blue-01.jpg"></img></td>
+            <td><img src="https://www.nba.com/sixers/sites/sixers/files/philaunite_blue-01.jpg"></img></td>
+        </tr>
+
+    </table>
+    <form style="padding-bottom: 100px;">
+        <fieldset>
+            <legend>
+                Event Details
+            </legend>
+                <p>
+                    <label>Event:</label>
+                    <input  type="text"
+                            id = "event"
+                            size="50"
+                            placeholder= "Some Concert/Event" 
+                            readonly/>
+                </p>
+                <p>
+                    <label>Venue:</label>
+                    <input  type="text"
+                            id = "venue"
+                            size="50"
+                            placeholder= "Location of event" 
+                            readonly/>
+                </p>
+                <p>
+                    <label>Ticket Quantity:</label>
+                    <input  type="text"
+                            id = "ticketqty"
+                            size="42"
+                            placeholder= "Enter the amount of tickets to purchase." />
+                </p>
+                <p class="formfield">
+                    <label>Description:</label>
+                    <textarea type="text" id = "description" rows="7" cols="100" readonly style="resize: none;"></textarea>
+                    </textarea>
+                </p>
+                <button type="submit" id="submit" value="submit">Submit</button>
+        </fieldset>
+    </form>
+
+
+</body>
+
+</html>
